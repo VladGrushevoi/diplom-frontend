@@ -1,0 +1,44 @@
+.container {
+    margin-top: 50px;
+    border: 2px solid ;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.grid {
+    padding: 0;
+}
+.container .child{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+}
+
+.parent {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
+
+.formCalc{
+    margin: 10px;
+    text-align: center;
+}
+
+.formCalc .left{
+    margin-right: 10px;
+    width: 230px;
+}
+.formCalc .right{
+    margin-left: 10px;
+    width: 230px;
+}
+.formCalc .submitButton {
+    margin-top: 20px;
+}
+
+.result-text{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}

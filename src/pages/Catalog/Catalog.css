@@ -1,0 +1,36 @@
+.form {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 0px;
+    border: 2px solid ;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+
+.form .combo-box{
+    width: 230px;
+    margin-left: 40px;
+}
+.form .input-catalog{
+    width: 230px;
+    margin-left: 40px;
+}
+
+.range {
+    width: 230px;
+    margin-right: 40px;
+    margin-left: 40px;
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+
+.form .button-catalog{
+    height: 55px;
+    width: 230px;
+    margin-left: 65px;
+    margin-bottom: 25px;
+}

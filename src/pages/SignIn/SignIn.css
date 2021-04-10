@@ -1,0 +1,19 @@
+.title{
+    text-align: center;
+    margin: 0;
+    color: #1dfdcd;
+    text-shadow: rgb(59, 48, 212) 1px 0 10px ;
+}
+
+.form-signIn{
+    margin: 10px;
+    text-align: left;
+}
+
+.form-signIn .inputSignIn {
+    margin-top: 2%;
+}
+
+.form-signIn p {
+    text-align: center;
+}

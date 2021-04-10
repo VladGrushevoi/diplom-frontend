@@ -1,0 +1,11 @@
+const actions = {
+    PREDICT_PRICE: "PREDICT_PRICE",
+    PORTITABLE_ORDERS: "PORTITABLE_ORDERS",
+    USE_CATALOG: "USE_CATALOG",
+    TWENTY_ORDERS: "TWENTY_ORDERS",
+    SIGN_UP: "SIGN_UP",
+    SIGN_IN: "SIGN_IN",
+    SIGN_OUT: "SIGN_OUT",
+}
+
+export default actions;
