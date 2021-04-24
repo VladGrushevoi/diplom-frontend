@@ -8,6 +8,7 @@ import { useComboBoxField } from '../../hooks/selectHook'
 import './PlaceManager.css'
 
 export const PlaceManeger = (props) => {
+    console.log(process.env.REACT_APP_API_GOOGLE)
     const districtsName = useComboBoxField('', 'DistrictsName')
     const placeName = useComboBoxField('', 'placeName')
     const [isDrawMap, setRedraw] = useState(true)
@@ -75,7 +76,7 @@ export const PlaceManeger = (props) => {
 
     const map = (
         <MapWithAMarker
-                googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtNPXzTRbAHcm_0JbdjT4e2P2Q2rrAb8I&v=3.exp&libraries=geometry,drawing,places"
+                googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_GOOGLE}&v=3.exp&libraries=geometry,drawing,places`}
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `400px` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
