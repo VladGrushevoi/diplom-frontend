@@ -3,13 +3,13 @@ import { CloudUpload } from '@material-ui/icons'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useTextField } from '../../hooks/hookInput'
-import { signUpAdmin, signUpRieltor, signUpUser } from '../../store/partials/Auth/actions'
+import { signUpUser } from '../../store/partials/Auth/actions'
 import { typeOfOsers } from '../../store/partials/Auth/typeUsers'
 import './SignUp.css'
 
 export default function SignUp(){
     const [message, setMessage] = useState("");
-    const chooseUser = useTextField("Користувач", "typeUser")
+    const chooseUser = useTextField("User", "typeUser")
     const email= useTextField("", "email")
     const password = useTextField("", "password")
     const passwordRepeat = useTextField("", "password")
@@ -25,24 +25,12 @@ export default function SignUp(){
             const data = {
                 email: email.value,
                 password: password.value,
-                type: chooseUser.value
+                status: chooseUser.value
             }
             console.log(data);
-            switch(chooseUser.value){
-                case typeOfOsers.USER:
-                    dispatch(signUpUser(data, setMessage))
-                    break;
-                case typeOfOsers.RIELTOR:
-                    dispatch(signUpRieltor(data, setMessage))
-                    break;
-                case typeOfOsers.ADMIN:
-                    dispatch(signUpAdmin(data, setMessage))
-                    break;
-                default:
-                    dispatch(signUpUser(data, setMessage))
+            dispatch(signUpUser(data, setMessage))
             }
         }
-    }
 
     return (
         <>
@@ -82,9 +70,9 @@ export default function SignUp(){
                     <FormControl component="fieldset" style={{marginTop: '2%'}} fullWidth>
                         <FormLabel component="legend" >Тип користувача</FormLabel>
                         <RadioGroup aria-label="gender" {...chooseUser}>
-                            <FormControlLabel value="Користувач" control={<Radio />} label="Користувач" />
-                            <FormControlLabel value="Рієлтор" control={<Radio />} label="Рієлтор" />
-                            <FormControlLabel value="Адміністратор" control={<Radio />} label="Адміністратор" />
+                            <FormControlLabel value={typeOfOsers.USER} control={<Radio />} label="Користувач" />
+                            <FormControlLabel value={typeOfOsers.RIELTOR} control={<Radio />} label="Рієлтор" />
+                            <FormControlLabel value={typeOfOsers.ADMIN} control={<Radio />} label="Адміністратор" />
                         </RadioGroup>
                         <Button
                             fullWidth

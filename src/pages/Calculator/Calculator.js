@@ -72,7 +72,7 @@ export default function Calculator() {
                             className='left'
                         />
                         
-                        <SelectDistricts className='right' set={districtsName} required={true}/>
+                        <SelectDistricts className='right' set={districtsName} required={true} label="Назва району" fetch="districts"/>
                     </Container>
                     <Button
                         variant="contained"
@@ -92,19 +92,13 @@ export default function Calculator() {
                 <h2>Зхожі варінти за вашим запитом</h2>
                     <div className="parent">
                         {
-                            authState.userType === typeOfOsers.GUEST ?
+                            authState.status === typeOfOsers.GUEST ?
                             <h2>Увійдіть в систему, для того щоб побачити</h2>
                             : apartmentState.calculatorList.length !== 0? apartmentState.calculatorList.map((item, index) => {
                                 return <CardAppartment key={index} appartment={item}/>
                             })
                             : <h1>ПУСТО</h1>
                         }
-                        {/* {console.log(apartmentState)}
-                        {apartmentState.calculatorList.length !== 0? apartmentState.calculatorList.map((item, index) => {
-                            return <CardAppartment key={index} appartment={item}/>
-                        })
-                        : <h1>ПУСТО</h1>
-                    } */}
                     </div>
         </>
     )

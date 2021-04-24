@@ -1,0 +1,20 @@
+.form  .selector{
+    margin: 20px;
+    margin-right: 20px;
+    width: 230px;
+}
+
+.form .button-add-place{
+    height: 55px;
+}
+
+.form .location{
+    margin: 0;
+    display: block;
+}
+
+.form .title{
+    position: absolute;
+    margin-left: 25%;
+}
+

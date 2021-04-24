@@ -54,7 +54,7 @@ export default function Catalog() {
                                 type='number'
                                 className="input-catalog"
                             />
-                            <ComboBox className='combo-box' set={districtName} required={false}/>
+                            <ComboBox className='combo-box' set={districtName} label="Назва району" required={false} fetch="districts"/>
                             <Button
                                 variant="contained"
                                 color="primary"

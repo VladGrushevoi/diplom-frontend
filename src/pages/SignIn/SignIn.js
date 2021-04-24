@@ -10,19 +10,19 @@ import './SignIn.css'
 export default function SignIn(){
     const [message, setMessage] = useState("")
     const loginEmail= useTextField("", "LoginEmail")
-    const loginPpassword = useTextField("", "LoginPassword")
+    const loginPassword = useTextField("", "LoginPassword")
     const dispatch = useDispatch();
     const history = useHistory();
 
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log("ало?")
         const data = {
             email: loginEmail.value,
-            password: loginPpassword.value,
+            password: loginPassword.value,
         }
         dispatch(signIn(data, setMessage, history))
+        console.log(localStorage)
     }
 
     return (
@@ -48,7 +48,7 @@ export default function SignIn(){
                         variant="outlined"
                         fullWidth
                         className="inputSignIn"
-                        {...loginPpassword}
+                        {...loginPassword}
                     />
                         <Button
                             fullWidth

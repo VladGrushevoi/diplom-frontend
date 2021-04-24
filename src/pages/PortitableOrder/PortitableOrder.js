@@ -62,7 +62,7 @@ export default function PortitableOrder(){
                             type='number'
                             className='left'
                         />
-                        <ComboBox className='combo-box' set={districtsName} required={true}/>
+                        <ComboBox className='combo-box' set={districtsName} label="Назва району" required={true} fetch="districts"/>
                     <Button
                         variant="contained"
                         color="primary"

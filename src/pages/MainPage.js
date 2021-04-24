@@ -86,7 +86,7 @@ function ResponsiveDrawer(props) {
           <ListItemIcon>{<AttachMoneyIcon />}</ListItemIcon>
           <CustomLink to={`/user-cabinet/calculator`}><ListItemText primary="Калькулятор ціни" /></CustomLink>
         </ListItem>
-        {authState.userType === typeOfOsers.RIELTOR || authState.userType === typeOfOsers.ADMIN ?
+        {authState.status === typeOfOsers.RIELTOR || authState.status === typeOfOsers.ADMIN ?
           <ListItem button>
             <ListItemIcon>{<EmojiEmotionsIcon />}</ListItemIcon>
             <CustomLink to={`/user-cabinet/portitable-orders`}><ListItemText primary="Вигідні пропозиції" /></CustomLink>
@@ -94,7 +94,7 @@ function ResponsiveDrawer(props) {
         :
         <></>
       }
-      {authState.userType !== typeOfOsers.GUEST ?
+      {authState.status !== typeOfOsers.GUEST ?
           <ListItem button>
             <ListItemIcon>{<ListAltIcon />}</ListItemIcon>
             <CustomLink to={`/user-cabinet/catalog`}><ListItemText primary="Каталог" /></CustomLink>
@@ -103,13 +103,17 @@ function ResponsiveDrawer(props) {
           <></>
       }
       </List>
-      {authState.userType === typeOfOsers.ADMIN ?
+      {authState.status === typeOfOsers.ADMIN ?
         <>
           <Divider />
           <List>
             <ListItem button>
               <ListItemIcon>{<CachedIcon />}</ListItemIcon>
               <CustomLink to={`/user-cabinet/root-setting`}><ListItemText primary="Оновлення квартир" /></CustomLink>
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>{<CachedIcon />}</ListItemIcon>
+              <CustomLink to={`/user-cabinet/place-manager`}><ListItemText primary="Керування місцями" /></CustomLink>
             </ListItem>
           </List>
         </>
@@ -118,7 +122,7 @@ function ResponsiveDrawer(props) {
       }
       {console.log(authState)}
       {
-        authState.userType === "Гість" ?
+        authState.status === typeOfOsers.GUEST ?
         <>
             <Divider />
             <List>
@@ -164,7 +168,7 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap style={{ marginLeft: 200 }}>
-            {authState.userType + " " + authState.email}
+            {authState.status + " " + authState.email}
           </Typography>
         </Toolbar>
       </AppBar>

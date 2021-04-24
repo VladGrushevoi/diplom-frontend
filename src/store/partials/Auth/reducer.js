@@ -4,7 +4,7 @@ import { typeOfOsers } from "./typeUsers";
 const initState = {
     email: "",
     password: "",
-    userType: typeOfOsers.GUEST
+    status: typeOfOsers.GUEST
 }
 
 
@@ -15,7 +15,7 @@ export const authReducer = (state = initState, action) => {
                 ...state,
                 email: action.payload.email,
                 password: action.payload.password,
-                userType: action.payload.userType
+                status: action.payload.status
             }
         case actions.SIGN_IN:
             console.log(action.payload)
@@ -23,7 +23,7 @@ export const authReducer = (state = initState, action) => {
                 ...state,
                 email: action.payload.email,
                 password: action.payload.password,
-                userType: action.payload.userType
+                status: action.payload.status
             }
         case actions.SIGN_OUT:
             return {

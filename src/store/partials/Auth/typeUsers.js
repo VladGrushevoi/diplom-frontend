@@ -1,6 +1,6 @@
 export const typeOfOsers = {
-    GUEST: "Гість",
-    USER: "Користувач",
-    RIELTOR: "Рієлтор",
-    ADMIN: "Адміністратор"
+    GUEST: "Guest",
+    USER: "User",
+    RIELTOR: "Rieltor",
+    ADMIN: "Administrator"
 }

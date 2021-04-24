@@ -7,7 +7,7 @@ import axios from 'axios';
 export default function ComboBox(props) {
     const [districts, setDistricts] = useState([])
     useEffect(() => {
-        axios.get("http://localhost:5000/api/info/districts")
+        axios.get(`http://localhost:5000/api/info/${props.fetch}`)
                     .then(res => {
                     console.log(res.data.districts)
                     setDistricts(res.data.districts)
@@ -16,11 +16,11 @@ export default function ComboBox(props) {
   return (
     <Autocomplete
       id="combo-box-demo"
-      options={districts}
+      options={districts.map(item => item.name)}
       getOptionSelected = {(option, value) => option === value}
       className={props.className}
       {...props.set}
-      renderInput={(params) => <TextField {...params} required={props.required} label="Назва району" variant="outlined"/>}
+      renderInput={(params) => <TextField {...params} required={props.required} label={props.label} variant="outlined"/>}
     />
   );
 }
