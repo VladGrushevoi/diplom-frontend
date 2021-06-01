@@ -10,6 +10,7 @@ const initState = {
         districtName: '',
         price: 0,
     },
+    priceSecond: 0,
     calculatorList: [],
     portitableList: [],
     catalogList:[],
@@ -43,6 +44,12 @@ export const predictPrice = (state = initState, action) => {
             return {
                 ...state,
                 catalog: action.payload
+            }
+        }
+        case actions.PREDICT_PRICE_SECOND: {
+            return {
+                ...state,
+                priceSecond: action.payload
             }
         }
         default: 

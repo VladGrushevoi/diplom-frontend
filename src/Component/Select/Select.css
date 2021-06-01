@@ -1,3 +1,8 @@
 .combo-box{
     width: 230px;
 }
+
+.combo-box-w{
+    width: 480px;
+    margin-left: 25px;
+}

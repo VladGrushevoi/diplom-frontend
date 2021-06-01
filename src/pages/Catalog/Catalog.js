@@ -63,7 +63,7 @@ export default function Catalog() {
                                 size='large'
                                 startIcon={<CloudUpload />}
                             >
-                                Upload
+                                ПОШУК
                     </Button>
                 </form>
             </Container>

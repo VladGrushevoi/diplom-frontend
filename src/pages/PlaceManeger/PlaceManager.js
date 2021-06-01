@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core'
-import { CloudUpload } from '@material-ui/icons'
+import { CloudUpload, Delete } from '@material-ui/icons'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { MapWithAMarker } from '../../Component/GoogleMap/GoogleMap'
@@ -12,6 +12,13 @@ export const PlaceManeger = (props) => {
     const districtsName = useComboBoxField('', 'DistrictsName')
     const placeName = useComboBoxField('', 'placeName')
     const [isDrawMap, setRedraw] = useState(true)
+    const [isViewInfo, setInfoView] = useState({
+        isView: false,
+        marker: {
+            districtName: "",
+            typePlaceName: ""
+        }
+    })
     const [marker, setMarker] = useState({
         latitude: 49.44253,
         longitude: 32.06207
@@ -74,6 +81,19 @@ export const PlaceManeger = (props) => {
                 })
     }
 
+    const handleDeletePlaceClick = () => {
+        axios.delete(`http://localhost:5000/api/place/${isViewInfo.marker.id}/delete-place`)
+        .then(res => {
+            axios.get("http://localhost:5000/api/place/get-places")
+                .then(res => {
+                    setRedraw(false)
+                    console.log(res.data.value.places);
+                    setFetchMarkers(res.data.value.places)
+                    setRedraw(true)
+                })
+        })
+    }
+
     const map = (
         <MapWithAMarker
                 googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_GOOGLE}&v=3.exp&libraries=geometry,drawing,places`}
@@ -83,12 +103,32 @@ export const PlaceManeger = (props) => {
                 setMarker = {handlerClickMap}
                 marker = {{lat:marker.latitude, lng:marker.longitude}}
                 fetchMarker = {fetchMarkers}
+                onClickMarker = {setInfoView}
             />
+    )
+
+    const markerInfo = (
+        <>
+        {console.log(isViewInfo)}
+            <p>{"Район: "+isViewInfo.marker.districtName + " Тип місця: " + isViewInfo.marker.typePlaceName}
+            <Button
+                        variant="contained"
+                        color="primary"
+                        className="button-add-place"
+                        startIcon={<Delete />}
+                        onClick={handleDeletePlaceClick}
+                        style={{marginLeft: 40}}
+                    >
+                        Видалити
+                    </Button>
+            </p>
+        </>
     )
 
     return (
         <>
        {isDrawMap ? map : null}
+       {isViewInfo.isView ? markerInfo : null}
             <form className="form" onSubmit={handleFormClick}>
                 <h2 className="title">Форма додвання ключового місця</h2>
             <div className='button-container'>

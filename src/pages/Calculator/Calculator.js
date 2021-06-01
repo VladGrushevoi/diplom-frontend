@@ -1,22 +1,27 @@
 import { Button, Container, TextField } from '@material-ui/core'
-import React from 'react'
+import React, { useState } from 'react'
 import './Calculator.css'
 import { CloudUpload } from '@material-ui/icons';
 import CardAppartment from '../../Component/Card/Card';
 import SelectDistricts from '../../Component/Select/Select'
 import { useDispatch, useSelector } from 'react-redux';
 import { useTextField } from '../../hooks/hookInput';
-import { predictPrice } from '../../store/partials/culculator/actions';
+import { predictPrice, predictPriceClasificationManual, predictPriceRegressionManual, predictPriceSecond } from '../../store/partials/culculator/actions';
 import { useComboBoxField } from '../../hooks/selectHook';
 import { typeOfOsers } from '../../store/partials/Auth/typeUsers';
+import CircularIndeterminate from '../../Component/Spinner/Spinner';
+import SelectMethods from '../../Component/Select/SelectorMethods';
+import methods from '../../Component/Select/TypesMethod';
 
 
 export default function Calculator() {
+    const [isDownload, setDownload] = useState(false);
     const dispatch = useDispatch()
     const totalSquare = useTextField("", 'TotalSqure');
     const roomsCount = useTextField("", 'RoomsCount');
     const floors = useTextField("", 'Floors');
     const districtsName = useComboBoxField('', 'DistrictsName')
+    const typeMethod = useComboBoxField('', "typeMethod")
     const apartmentState = useSelector(state => state.predict)
     const authState = useSelector(state => state.auth)
     console.log(apartmentState)
@@ -29,8 +34,22 @@ export default function Calculator() {
             floor: parseInt(floors.value,10),
             districtName: districtsName.value
         }
-        dispatch(predictPrice(data));
-        console.log()
+        console.log(typeMethod)
+        setDownload(true)
+        switch(typeMethod.value){
+            case methods.REGRESSION_AUTO:
+                dispatch(predictPrice(data, setDownload));
+                break;
+            case methods.REGRESSION_MANUAL:
+                dispatch(predictPriceRegressionManual(data, setDownload))
+                break;
+            case methods.CLASIFICATION_AUTO:
+                dispatch(predictPriceSecond(data, setDownload))
+                break;
+            case methods.CLASIFICATION_MANUAL:
+                dispatch(predictPriceClasificationManual(data, setDownload))
+                break;
+        }
     }
 
     return (
@@ -74,18 +93,29 @@ export default function Calculator() {
                         
                         <SelectDistricts className='right' set={districtsName} required={true} label="Назва району" fetch="districts"/>
                     </Container>
-                    <Button
+                    <SelectMethods set={typeMethod}/>
+                    {
+                        isDownload ? <CircularIndeterminate />
+                        :
+                        <Button
                         variant="contained"
                         color="primary"
                         className="submitButton"
                         type="submit"
                         startIcon={<CloudUpload />}
-                    >
-                        Зпрогнозувати
-                    </Button>
+                        >
+                            Зпрогнозувати
+                        </Button>
+                    }
+                    
                 </form>
-
-                <h3 className="result-text">Ціна за такі параметри {apartmentState.apartment.price}$</h3>
+                {
+                    isDownload ? null 
+                    :
+                    <>
+                    <h3 className="result-text"><span>Зпрогнозована: </span> ціна за такі параметри {apartmentState.apartment.price}$</h3>
+                    </>
+                }
             </Container>
 
             
